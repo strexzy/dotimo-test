@@ -1,10 +1,10 @@
-import { Card } from "@/components/ui/card";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import { useState } from "react";
 
 type CubeProps = {
   onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -13,21 +13,52 @@ type CubeProps = {
 };
 
 const Cube = ({ posX, posY, onMouseDown }: CubeProps) => {
+  const [cubeColor, setCubeColor] = useState<string>("orange");
+
   return (
-    <Card
-      onMouseDown={onMouseDown}
-      className="
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <div
+          onMouseDown={onMouseDown}
+          className={`
             absolute
-            w-12.5 h-12.5
+            w-25 h-25
+            rounded-md
             cursor-grab
             active:cursor-grabbing
             transition-shadow
             shadow-md
-          "
-      style={{
-        transform: `translate(${posX}px, ${posY}px)`,
-      }}
-    />
+          `}
+          style={{
+            transform: `translate(${posX}px, ${posY}px)`,
+            backgroundColor: cubeColor,
+          }}
+        />
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem
+          onClick={() => {
+            setCubeColor("orange");
+          }}
+        >
+          Orange
+        </ContextMenuItem>
+        <ContextMenuItem
+          onClick={() => {
+            setCubeColor("blue");
+          }}
+        >
+          Blue
+        </ContextMenuItem>
+        <ContextMenuItem
+          onClick={() => {
+            setCubeColor("red");
+          }}
+        >
+          Red
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 };
 

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Cube from "./cube";
 
 const BOARD_SIZE = 800;
-const CUBE_SIZE = 50;
+const CUBE_SIZE = 100;
 
 export function Board() {
   const boardRef = useRef<HTMLDivElement>(null);
@@ -52,14 +52,14 @@ export function Board() {
   }, [dragging]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-zinc-900">
+    <>
       <div
         ref={boardRef}
         className="
           relative
-          w-[800px] h-[800px]
+          w-200 h-200
           border-2 border-zinc-700
-          bg-zinc-800
+          bg-primary
           select-none
         "
       >
@@ -69,6 +69,6 @@ export function Board() {
           posY={position.y}
         />
       </div>
-    </div>
+    </>
   );
 }
