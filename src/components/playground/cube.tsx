@@ -10,9 +10,10 @@ type CubeProps = {
   onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
   posX: number;
   posY: number;
+  isActive: boolean;
 };
 
-const Cube = ({ posX, posY, onMouseDown }: CubeProps) => {
+const Cube = ({ posX, posY, onMouseDown, isActive }: CubeProps) => {
   const [cubeColor, setCubeColor] = useState<string>("orange");
 
   return (
@@ -28,7 +29,7 @@ const Cube = ({ posX, posY, onMouseDown }: CubeProps) => {
             cursor-grab
             active:cursor-grabbing
             transition-shadow
-            shadow-md
+            ${isActive && " border-2 border-white border-dashed"}
           `}
           style={{
             transform: `translate(${posX}px, ${posY}px)`,
