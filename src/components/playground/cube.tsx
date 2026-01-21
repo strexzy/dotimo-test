@@ -29,7 +29,7 @@ const Cube = ({ posX, posY, onMouseDown, isActive }: CubeProps) => {
             cursor-grab
             active:cursor-grabbing
             transition-shadow
-            ${isActive && " border-2 border-white border-dashed"}
+            ${isActive && " border-2 border-accent-foreground border-dashed"}
           `}
           style={{
             transform: `translate(${posX}px, ${posY}px)`,
