@@ -1,10 +1,10 @@
+import { useState } from "react";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { useState } from "react";
 
 type CubeProps = {
   onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -18,6 +18,7 @@ const Cube = ({ posX, posY, onMouseDown }: CubeProps) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
+        {/** biome-ignore lint/a11y/noStaticElementInteractions: <> */}
         <div
           onMouseDown={onMouseDown}
           className={`

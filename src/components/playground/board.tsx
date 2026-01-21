@@ -52,23 +52,17 @@ export function Board() {
   }, [dragging]);
 
   return (
-    <>
-      <div
-        ref={boardRef}
-        className="
+    <div
+      ref={boardRef}
+      className="
           relative
           w-200 h-200
           border-2 border-zinc-700
           bg-primary
           select-none
         "
-      >
-        <Cube
-          onMouseDown={handleMouseDown}
-          posX={position.x}
-          posY={position.y}
-        />
-      </div>
-    </>
+    >
+      <Cube onMouseDown={handleMouseDown} posX={position.x} posY={position.y} />
+    </div>
   );
 }
