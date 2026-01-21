@@ -1,73 +1,119 @@
-# React + TypeScript + Vite
+# Dotimo Test Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение для взаимодействия с перемещаемыми кубами на доске. Кубы можно перетаскивать, соединять друг с другом, менять их цвет и разделять.
 
-Currently, two official plugins are available:
+## Технологический стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19.2** - фреймворк для создания интерфейса
+- **TypeScript** - типизированный JavaScript
+- **Vite** - быстрый сборщик
+- **Tailwind CSS** - утилитарный CSS фреймворк
+- **Radix UI** - компоненты для меню и контекстных меню
+- **Biome** - форматер и линтер кода
 
-## React Compiler
+## Установка и запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Требования
 
-## Expanding the ESLint configuration
+- Node.js 16+
+- npm или yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Установка зависимостей
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Запуск в режиме разработки
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Приложение откроется на `http://localhost:5173`
+
+### Сборка для продакшена
+
+```bash
+npm run build
+```
+
+### Проверка кода
+
+```bash
+npm run lint           # Проверка ESLint
+npm run lint-format    # Проверка и исправление форматирования Biome
+```
+
+## Использование приложения
+
+### Управление кубами
+
+#### 1. **Перемещение кубов**
+
+- Нажмите и удерживайте левую кнопку мыши на кубе
+- Перетащите куб на нужную позицию
+- Отпустите кнопку мыши для завершения перемещения
+
+#### 2. **Соединение кубов**
+
+- Перемещайте один куб в сторону другого
+- Когда кубы соприкасаются, они автоматически соединяются
+- Соединённые кубы движутся вместе как одна группа
+
+#### 3. **Изменение цвета**
+
+- Нажмите правую кнопку мыши на кубе (вызовет контекстное меню)
+- Выберите нужный цвет из предложенных вариантов
+- Цвет куба изменится мгновенно
+
+#### 4. **Разделение соединённых кубов**
+
+- Нажмите кнопку для разделения кубов
+- Кубы разделятся с анимацией
+
+### Интерфейс
+
+**Переключение темы**: нажмите кнопку переключения темы, чтобы выбрать между тёмной и светлой темой.
+
+## Архитектура проекта
+
+```
+src/
+├── components/
+│   ├── playground/     # Основные компоненты игры
+│   │   ├── board.tsx   # Главный компонент доски
+│   │   ├── cube.tsx    # Компонент отдельного куба
+│   │   └── board.types.ts  # Типы данных
+│   └── ui/            # UI компоненты
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── context-menu.tsx
+│       ├── dropdown-menu.tsx
+│       ├── theme-provider.tsx
+│       └── theme-toggle.tsx
+├── lib/               # Утилиты и константы
+│   ├── constants.ts
+│   ├── utils.ts
+│   └── index.ts
+├── App.tsx            # Главный компонент приложения
+├── main.tsx           # Точка входа
+└── globals.css        # Глобальные стили
+```
+
+## Основные возможности
+
+✅ Перетаскивание кубов по доске  
+✅ Автоматическое соединение соприкасающихся кубов  
+✅ Совместное перемещение соединённых кубов  
+✅ Изменение цвета кубов  
+✅ Разделение соединённых кубов  
+✅ Переключение тёмной/светлой темы  
+✅ Полная типизация TypeScript
+
+## Управление мышью
+
+Приложение управляется исключительно мышью:
+
+- **ЛКМ (левая кнопка мыши)** - перемещение кубов
+- **ПКМ (правая кнопка мыши)** - контекстное меню (цвет)
